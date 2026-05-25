@@ -1,0 +1,212 @@
+.week-view {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  background: var(--bg-deep);
+  overflow: hidden;
+}
+
+.week-header {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  background: rgba(13, 17, 28, 0.2);
+  border-bottom: 1px solid var(--border-light);
+  padding: 10px 0;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.week-header-space {
+  border-right: 1px solid var(--border-light);
+}
+
+.week-header-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.week-header-day-num {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+.week-header-day.today .week-header-day-num {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 0 8px var(--primary);
+}
+
+.week-header-day.selected .week-header-day-num {
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Grid Scroll Container */
+.week-grid-container {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  position: relative;
+  /* 24 hours * 60px = 1440px height */
+  height: 1440px; 
+}
+
+/* Hourly Rows */
+.week-hour-row {
+  grid-column: 1 / -1;
+  height: 60px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+.week-time-label {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 50px;
+  text-align: right;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Day Columns */
+.week-day-column {
+  border-right: 1px solid var(--border-light);
+  height: 100%;
+  position: relative;
+}
+
+.week-day-column:last-child {
+  border-right: none;
+}
+
+.week-grid-cell-click {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 60px; /* Each cell takes 60px */
+  cursor: pointer;
+}
+
+.week-grid-cell-click:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+/* Absolutely Positioned Week Event Cards */
+.week-event-card {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 11px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  z-index: 5;
+}
+
+.week-event-card:hover {
+  transform: scale(1.01);
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.1);
+}
+
+.week-event-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.week-event-time {
+  opacity: 0.8;
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.week-event-desc {
+  font-size: 9px;
+  opacity: 0.7;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+/* Red line representing current time */
+.week-current-time-line {
+  position: absolute;
+  left: 60px;
+  right: 0;
+  height: 2px;
+  background: #ef4444;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.week-current-time-line::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+  .week-header {
+    grid-template-columns: 50px repeat(7, 1fr);
+  }
+  
+  .week-grid {
+    grid-template-columns: 50px repeat(7, 1fr);
+  }
+
+  .week-header-day-num {
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .week-event-title {
+    font-size: 9px;
+  }
+  
+  .week-event-time {
+    font-size: 8px;
+  }
+
+  .week-event-desc {
+    display: none;
+  }
+}

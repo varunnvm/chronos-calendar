@@ -1,0 +1,139 @@
+.month-view {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  background: var(--bg-deep);
+}
+
+.month-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: rgba(13, 17, 28, 0.2);
+  border-bottom: 1px solid var(--border-light);
+  padding: 8px 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  flex: 1;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.month-day-cell {
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  min-height: 80px;
+  cursor: pointer;
+  position: relative;
+  transition: background var(--transition-fast);
+}
+
+.month-day-cell:nth-child(7n) {
+  border-right: none;
+}
+
+.month-day-cell:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.month-day-cell.outside {
+  background: rgba(0, 0, 0, 0.1);
+  opacity: 0.35;
+}
+
+.month-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.month-day-num {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: var(--font-display);
+}
+
+.month-day-cell.today .month-day-num {
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.month-day-cell.selected {
+  background: rgba(99, 102, 241, 0.04);
+}
+
+.month-day-cell.selected .month-day-num {
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+}
+
+/* Event Badges in Month View */
+.month-event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  flex: 1;
+  padding-bottom: 4px;
+}
+
+.month-event-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.month-event-badge:hover {
+  transform: translateY(-0.5px);
+  filter: brightness(1.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .month-weekdays {
+    font-size: 10px;
+    padding: 6px 0;
+  }
+  
+  .month-day-num {
+    font-size: 11px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .month-event-badge {
+    padding: 2px 4px;
+    font-size: 9px;
+  }
+}
